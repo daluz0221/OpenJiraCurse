@@ -1,9 +1,13 @@
+import { SetStateAction } from 'react';
 import { UIState } from './UIProvider';
 
 
 type UIActionType = 
 |{ type:       '[UI] - Open Sidebar'}
 |{ type:       '[UI] - Close Sidebar'}
+|{ type:       '[UI] - Set NewEntry', payload:  boolean}
+|{ type:       '[UI] - Start Draging'}
+|{ type:       '[UI] - End Draging'}
 
 export const uiReducer = (state: UIState, action: UIActionType): UIState => {
 
@@ -18,6 +22,22 @@ export const uiReducer = (state: UIState, action: UIActionType): UIState => {
                 ...state,
                 sidemenuOpen: false,
             }
+        case '[UI] - Set NewEntry':
+            return {
+                ...state,
+                isAddingEntry: action.payload,
+            }
+        case '[UI] - Start Draging':
+            return {
+                ...state,
+                isDragging: true
+            }
+        case '[UI] - End Draging':
+            return {
+                ...state,
+                isDragging: false
+            }
+        
 
 
 
